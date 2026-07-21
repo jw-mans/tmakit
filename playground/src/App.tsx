@@ -1,7 +1,15 @@
 import { useEffect, useState } from 'react';
 import { on, postEvent } from '@telegram-apps/bridge';
 import { DevtoolsPanel } from 'tma-devtools';
-import { useSafeArea, useStoredState, useSupports, useViewport } from 'tma-kit';
+import {
+  BackButton,
+  MainButton,
+  useSafeArea,
+  useStoredState,
+  useSupports,
+  useViewport,
+  usePayment,
+} from 'tma-kit';
 import { mock } from './tma-mock';
 
 // Buttons that make the "app" send calls to the client, so the panel has traffic.
@@ -135,10 +143,40 @@ function App() {
       </section>
 
       <StorageDemo />
+      <NavPaymentDemo />
 
       {/* HARD RULE: dev-only mount. */}
       {import.meta.env.DEV && <DevtoolsPanel controller={mock} />}
     </main>
+  );
+}
+
+// Declarative buttons + payment. Press the buttons from the panel's Buttons tab;
+// resolve the invoice from the Async tab. BackButton appears only on the detail screen.
+function NavPaymentDemo() {
+  const [screen, setScreen] = useState<'home' | 'detail'>('home');
+  const payment = usePayment();
+
+  return (
+    <section style={{ border: '1px solid #333', borderRadius: 8, padding: '0.75rem 1rem', marginTop: '1rem' }}>
+      <div style={{ color: '#888', fontSize: '0.8em', marginBottom: 6 }}>
+        tma-kit navigation + payment (buttons live in the panel's Buttons/Async tabs):
+      </div>
+      <div style={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.85em' }}>
+        screen: <b style={{ color: '#4ea1ff' }}>{screen}</b> · payment:{' '}
+        <b style={{ color: '#8fbf8f' }}>{payment.status}</b>
+        {payment.slug ? ` (${payment.slug})` : ''}
+      </div>
+
+      {screen === 'detail' && <BackButton onClick={() => setScreen('home')} />}
+      <MainButton
+        text={screen === 'home' ? 'Go to detail' : 'Buy 100 ⭐'}
+        onClick={() => {
+          if (screen === 'home') setScreen('detail');
+          else void payment.open('demo-invoice-slug');
+        }}
+      />
+    </section>
   );
 }
 
