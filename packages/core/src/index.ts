@@ -35,6 +35,9 @@ export type {
   Insets,
 } from './mock/autoResponder';
 
+export { createRequestManager, DEFAULT_INTERACTIVE_METHODS } from './mock/requests';
+export type { PendingRequest, RequestManager } from './mock/requests';
+
 export { normalizeOnEventArgs } from './mock/normalizeCall';
 
 export { buildInitData, buildLaunchParams, DEFAULT_THEME_PARAMS, DEFAULT_USER } from './mock/defaults';

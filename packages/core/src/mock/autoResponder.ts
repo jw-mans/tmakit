@@ -21,9 +21,20 @@ export interface AutoResponderOptions {
   viewport?: { height?: number; width?: number; isExpanded?: boolean };
   safeAreaInsets?: Insets;
   contentSafeAreaInsets?: Insets;
+  /** Default `biometry_info_received` payload for the silent `biometry_get_info` query. */
+  biometry?: Record<string, unknown>;
   /** Extra rules, run before the built-ins. First one to return a value wins. */
   rules?: AutoResponderRule[];
 }
+
+const DEFAULT_BIOMETRY = {
+  available: true,
+  access_requested: false,
+  access_granted: false,
+  token_saved: false,
+  device_id: 'mock-device',
+  type: 'finger',
+} as const;
 
 const NO_INSETS: Insets = { top: 0, right: 0, bottom: 0, left: 0 };
 
@@ -72,6 +83,10 @@ export function createAutoResponder(options: AutoResponderOptions = {}) {
         return [
           { name: 'content_safe_area_changed', params: options.contentSafeAreaInsets ?? NO_INSETS },
         ];
+
+      // Silent query (no permission prompt) — auto-answer so it never hangs.
+      case 'web_app_biometry_get_info':
+        return [{ name: 'biometry_info_received', params: options.biometry ?? { ...DEFAULT_BIOMETRY } }];
 
       default:
         return [];

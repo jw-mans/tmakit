@@ -3,6 +3,11 @@ import { createBridgeLogger, type BridgeLogger, type BridgeLoggerOptions } from 
 import { createAutoResponder, type AutoResponderOptions } from './autoResponder';
 import { normalizeOnEventArgs } from './normalizeCall';
 import { buildLaunchParams, DEFAULT_THEME_PARAMS, type BuildLaunchParamsOptions } from './defaults';
+import {
+  createRequestManager,
+  DEFAULT_INTERACTIVE_METHODS,
+  type RequestManager,
+} from './requests';
 
 export interface CreateMockOptions {
   /**
@@ -18,6 +23,12 @@ export interface CreateMockOptions {
   autoRespond?: boolean;
   autoResponder?: AutoResponderOptions;
   logger?: BridgeLoggerOptions;
+  /**
+   * Methods that open a stateful async flow (popup, invoice, QR, clipboard, biometry).
+   * These are surfaced as pending requests instead of being auto-answered. Defaults to
+   * {@link DEFAULT_INTERACTIVE_METHODS}.
+   */
+  interactiveMethods?: readonly string[];
   /** Called for every outgoing app → client call, after it is logged. */
   onCall?: (call: BridgeCall) => void;
 }
@@ -25,6 +36,8 @@ export interface CreateMockOptions {
 export interface MockController {
   /** The bridge log (both directions). Subscribe for a live "network tab". */
   readonly logger: BridgeLogger;
+  /** Pending stateful async requests awaiting a panel-driven response. */
+  readonly requests: RequestManager;
   /** Emit an event into the app (client → app); also recorded in the log as 'in'. */
   emit(name: string, params?: unknown): void;
 }
@@ -52,6 +65,9 @@ export function createMock(options: CreateMockOptions): MockController {
     bridge.emitEvent(name, params);
   };
 
+  const requests = createRequestManager(emit);
+  const interactive = new Set(options.interactiveMethods ?? DEFAULT_INTERACTIVE_METHODS);
+
   const launchParams = options.launchParams ?? buildLaunchParams(options.defaults);
 
   bridge.mockTelegramEnv({
@@ -60,11 +76,16 @@ export function createMock(options: CreateMockOptions): MockController {
       const call = normalizeOnEventArgs(args);
       logger.add('out', call.name, call.params);
       options.onCall?.(call);
+      // Stateful async flows wait for a panel-driven response.
+      if (interactive.has(call.name)) {
+        requests.add(call.name, call.params);
+        return;
+      }
       if (autoRespond) {
         for (const response of respond(call)) emit(response.name, response.params);
       }
     },
   });
 
-  return { logger, emit };
+  return { logger, requests, emit };
 }
