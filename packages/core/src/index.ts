@@ -38,6 +38,10 @@ export type {
 export { createRequestManager, DEFAULT_INTERACTIVE_METHODS } from './mock/requests';
 export type { PendingRequest, RequestManager } from './mock/requests';
 
+// Version / platform gating
+export { METHOD_MIN_VERSION } from './support/versionMap';
+export { compareVersions, isMethodSupported } from './support/isSupported';
+
 export { normalizeOnEventArgs } from './mock/normalizeCall';
 
 export { buildInitData, buildLaunchParams, DEFAULT_THEME_PARAMS, DEFAULT_USER } from './mock/defaults';

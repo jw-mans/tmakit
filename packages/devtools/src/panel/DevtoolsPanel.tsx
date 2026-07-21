@@ -6,11 +6,12 @@ import { UserTab } from './UserTab';
 import { ViewportTab } from './ViewportTab';
 import { ButtonsTab } from './ButtonsTab';
 import { AsyncTab } from './AsyncTab';
+import { PlatformTab } from './PlatformTab';
 import { C, mono, PanelButton, sans } from './ui';
 
-type Tab = 'log' | 'user' | 'theme' | 'viewport' | 'buttons' | 'async';
+type Tab = 'log' | 'user' | 'theme' | 'viewport' | 'buttons' | 'async' | 'platform';
 
-const TABS: readonly Tab[] = ['log', 'user', 'theme', 'viewport', 'buttons', 'async'];
+const TABS: readonly Tab[] = ['log', 'user', 'theme', 'viewport', 'buttons', 'async', 'platform'];
 
 export interface DevtoolsPanelProps {
   controller: MockController;
@@ -121,6 +122,7 @@ export function DevtoolsPanel({ controller, defaultOpen = false }: DevtoolsPanel
         {tab === 'viewport' && <ViewportTab controller={controller} />}
         {tab === 'buttons' && <ButtonsTab controller={controller} />}
         {tab === 'async' && <AsyncTab controller={controller} />}
+        {tab === 'platform' && <PlatformTab />}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { on, postEvent } from '@telegram-apps/bridge';
 import { DevtoolsPanel } from 'tma-devtools';
-import { useSafeArea, useViewport } from 'tma-kit';
+import { useSafeArea, useSupports, useViewport } from 'tma-kit';
 import { mock } from './tma-mock';
 
 // Buttons that make the "app" send calls to the client, so the panel has traffic.
@@ -51,6 +51,10 @@ function App() {
   // tma-kit runtime hooks — driven live by the panel's Viewport tab.
   const viewport = useViewport();
   const { safeArea, contentSafeArea } = useSafeArea();
+
+  // Feature-gating — flips when you change the version in the panel's Platform tab.
+  const supportsFullscreen = useSupports('web_app_request_fullscreen'); // 8.0+
+  const supportsPopup = useSupports('web_app_open_popup'); // 6.2+
 
   useEffect(() => {
     const names = ['theme_changed', 'viewport_changed', 'safe_area_changed'] as const;
@@ -123,6 +127,10 @@ function App() {
         <div>
           safeArea: [{safeArea.top}, {safeArea.right}, {safeArea.bottom}, {safeArea.left}] · content: [
           {contentSafeArea.top}, {contentSafeArea.right}, {contentSafeArea.bottom}, {contentSafeArea.left}]
+        </div>
+        <div>
+          useSupports: request_fullscreen={supportsFullscreen ? '✓' : '✗'} · open_popup=
+          {supportsPopup ? '✓' : '✗'} <span style={{ color: '#666' }}>(change version in Platform tab)</span>
         </div>
       </section>
 

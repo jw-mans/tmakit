@@ -23,3 +23,5 @@ export {
   ZERO_INSETS,
 } from './safeArea';
 export type { Insets, SafeAreaKind, UseSafeAreaResult, UseSafeAreaOptions } from './safeArea';
+
+export { useSupports } from './support';

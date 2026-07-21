@@ -12,6 +12,8 @@ export interface TmaBridge {
   postEvent?(method: string, params?: unknown): void;
   /** Feature-gate: whether a method is supported by the current client/version. */
   isSupported?(method: string): boolean;
+  /** Current client version (e.g. "8.0"). Used to fall back to the version map. */
+  version?: string;
 }
 
 const BridgeContext = createContext<TmaBridge | null>(null);

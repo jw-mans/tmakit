@@ -11,15 +11,18 @@ const bridge: BridgePort = {
   emitEvent,
 };
 
-// Overrides written by the panel (user/theme edits) apply on reload.
+// Overrides written by the panel (user/theme/platform edits) apply on reload.
 const override = loadLaunchParamsOverride();
+
+export const effectiveVersion = override?.version ?? '8.0';
+export const effectivePlatform = override?.platform ?? 'tdesktop';
 
 export const mock = createMock({
   bridge,
   defaults: {
     user: { id: 99281932, first_name: 'Test', username: 'testuser', language_code: 'en' },
-    platform: 'tdesktop',
-    version: '8.0',
+    platform: effectivePlatform,
+    version: effectiveVersion,
     ...override,
   },
 });
