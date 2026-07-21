@@ -1,0 +1,12 @@
+# Node; Vite
+node_modules/
+dist/
+*.tsbuildinfo
+.DS_Store
+*.local
+.vite/
+coverage/
+
+# MD Planning
+PLAN.md
+TMA-DEV-REFERENCE.md

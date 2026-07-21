@@ -1,0 +1,31 @@
+{
+  "name": "@tmakit/core",
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Shared foundation for tmakit: SDK-agnostic bridge protocol types, event map and transport adapters",
+  "license": "MIT",
+  "sideEffects": false,
+  "files": ["dist"],
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@telegram-apps/bridge": "*",
+    "@tma.js/bridge": "*"
+  },
+  "peerDependenciesMeta": {
+    "@telegram-apps/bridge": { "optional": true },
+    "@tma.js/bridge": { "optional": true }
+  }
+}

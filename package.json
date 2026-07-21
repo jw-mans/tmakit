@@ -1,0 +1,24 @@
+{
+  "name": "tmakit",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "SDK-agnostic devtools and runtime kit for Telegram Mini Apps",
+  "license": "MIT",
+  "workspaces": [
+    "packages/*",
+    "playground"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w playground",
+    "build": "npm run build -w @tmakit/core && npm run build -w tma-kit && npm run build -w tma-devtools",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\""
+  },
+  "devDependencies": {
+    "prettier": "^3.4.0",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1"
+  }
+}
