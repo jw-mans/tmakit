@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { on, postEvent } from '@telegram-apps/bridge';
 import { DevtoolsPanel } from 'tma-devtools';
-import { useSafeArea, useSupports, useViewport } from 'tma-kit';
+import { useSafeArea, useStoredState, useSupports, useViewport } from 'tma-kit';
 import { mock } from './tma-mock';
 
 // Buttons that make the "app" send calls to the client, so the panel has traffic.
@@ -134,9 +134,42 @@ function App() {
         </div>
       </section>
 
+      <StorageDemo />
+
       {/* HARD RULE: dev-only mount. */}
       {import.meta.env.DEV && <DevtoolsPanel controller={mock} />}
     </main>
+  );
+}
+
+// tma-kit CloudStorage (via the mock's in-memory simulation over the bridge).
+function StorageDemo() {
+  const { value, setValue, loading } = useStoredState<string>('demo:note', { initial: '' });
+  const [draft, setDraft] = useState('');
+
+  return (
+    <section style={{ border: '1px solid #333', borderRadius: 8, padding: '0.75rem 1rem', marginTop: '1rem' }}>
+      <div style={{ color: '#888', fontSize: '0.8em', marginBottom: 6 }}>
+        tma-kit CloudStorage (persists over the bridge → mock sim; survives reload):
+      </div>
+      <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
+        <input
+          value={draft}
+          placeholder="note to persist"
+          onChange={(e) => setDraft(e.target.value)}
+          style={{ padding: '0.4rem 0.6rem', borderRadius: 6, border: '1px solid #444', flex: 1, minWidth: 160 }}
+        />
+        <button
+          onClick={() => setValue(draft)}
+          style={{ padding: '0.4rem 0.75rem', borderRadius: 6, border: '1px solid #3a5', cursor: 'pointer' }}
+        >
+          save
+        </button>
+        <span style={{ fontFamily: 'ui-monospace, monospace', fontSize: '0.85em', color: '#4ea1ff' }}>
+          stored: {loading ? '…' : JSON.stringify(value)}
+        </span>
+      </div>
+    </section>
   );
 }
 

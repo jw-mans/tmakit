@@ -1,5 +1,5 @@
 /**
- * Method → minimum Bot API version.
+ * Method -> minimum Bot API version.
  *
  * SOURCE OF TRUTH IS THE CHANGELOG, NOT MEMORY. This list is intentionally a
  * single, separate module so it can be kept in sync with
@@ -31,7 +31,7 @@ const CONFIRMED: Record<string, string> = {
   web_app_open_location_settings: '8.0',
 };
 
-// ⚠️ Grouped from reference milestones but NOT re-verified against the changelog in
+// Grouped from reference milestones but NOT re-verified against the changelog in
 // this pass — confirm the exact version before relying on these for gating.
 const UNVERIFIED: Record<string, string> = {
   web_app_biometry_request_access: '7.2',

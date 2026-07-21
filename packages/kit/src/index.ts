@@ -25,3 +25,33 @@ export {
 export type { Insets, SafeAreaKind, UseSafeAreaResult, UseSafeAreaOptions } from './safeArea';
 
 export { useSupports } from './support';
+
+export { useInitDataAuth } from './auth';
+export type {
+  UseInitDataAuthOptions,
+  UseInitDataAuthResult,
+  InitDataAuthState,
+  AuthStatus,
+} from './auth';
+
+export {
+  CLOUD_STORAGE_LIMITS,
+  StorageLimitError,
+  createCloudStorageAdapter,
+  createLocalStorageAdapter,
+  resolveStorageAdapter,
+  createTypedStore,
+} from './storage';
+export type {
+  StorageAdapter,
+  StorageLike,
+  Schema,
+  TypedStore,
+  CloudStorageOptions,
+  LocalStorageOptions,
+  ResolveStorageOptions,
+  CreateTypedStoreOptions,
+} from './storage';
+
+export { useStoredState } from './useStoredState';
+export type { UseStoredStateOptions, UseStoredStateResult } from './useStoredState';

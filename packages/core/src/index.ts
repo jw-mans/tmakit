@@ -38,6 +38,9 @@ export type {
 export { createRequestManager, DEFAULT_INTERACTIVE_METHODS } from './mock/requests';
 export type { PendingRequest, RequestManager } from './mock/requests';
 
+export { createCloudStorageSim } from './mock/cloudStorage';
+export type { CloudStorageSim } from './mock/cloudStorage';
+
 // Version / platform gating
 export { METHOD_MIN_VERSION } from './support/versionMap';
 export { compareVersions, isMethodSupported } from './support/isSupported';

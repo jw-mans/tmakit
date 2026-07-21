@@ -5,9 +5,10 @@ export default defineConfig({
   plugins: [react()],
   build: {
     lib: {
-      entry: 'src/index.ts',
+      // Two entries: client (index) and server-only auth (server, Node crypto).
+      entry: { index: 'src/index.ts', server: 'src/server.ts' },
       formats: ['es', 'cjs'],
-      fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`,
+      fileName: (format, entryName) => `${entryName}.${format === 'es' ? 'js' : 'cjs'}`,
     },
     rolldownOptions: {
       external: [
@@ -17,6 +18,7 @@ export default defineConfig({
         '@tmakit/core',
         '@tma.js/bridge',
         '@telegram-apps/bridge',
+        'node:crypto',
       ],
     },
   },

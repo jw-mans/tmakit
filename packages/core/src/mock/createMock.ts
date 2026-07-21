@@ -8,6 +8,7 @@ import {
   DEFAULT_INTERACTIVE_METHODS,
   type RequestManager,
 } from './requests';
+import { createCloudStorageSim, type CloudStorageSim } from './cloudStorage';
 
 export interface CreateMockOptions {
   /**
@@ -29,6 +30,8 @@ export interface CreateMockOptions {
    * {@link DEFAULT_INTERACTIVE_METHODS}.
    */
   interactiveMethods?: readonly string[];
+  /** Simulate CloudStorage in-memory (answers invoke_custom_method). Default: true. */
+  cloudStorage?: boolean;
   /** Called for every outgoing app → client call, after it is logged. */
   onCall?: (call: BridgeCall) => void;
 }
@@ -38,6 +41,8 @@ export interface MockController {
   readonly logger: BridgeLogger;
   /** Pending stateful async requests awaiting a panel-driven response. */
   readonly requests: RequestManager;
+  /** In-memory CloudStorage simulation (undefined if disabled). */
+  readonly cloudStorage?: CloudStorageSim;
   /** Emit an event into the app (client → app); also recorded in the log as 'in'. */
   emit(name: string, params?: unknown): void;
 }
@@ -67,6 +72,7 @@ export function createMock(options: CreateMockOptions): MockController {
 
   const requests = createRequestManager(emit);
   const interactive = new Set(options.interactiveMethods ?? DEFAULT_INTERACTIVE_METHODS);
+  const cloudStorage = options.cloudStorage === false ? undefined : createCloudStorageSim();
 
   const launchParams = options.launchParams ?? buildLaunchParams(options.defaults);
 
@@ -76,6 +82,10 @@ export function createMock(options: CreateMockOptions): MockController {
       const call = normalizeOnEventArgs(args);
       logger.add('out', call.name, call.params);
       options.onCall?.(call);
+      // CloudStorage simulation answers invoke_custom_method for storage methods.
+      if (cloudStorage && call.name === 'web_app_invoke_custom_method' && cloudStorage.handle(call.params, emit)) {
+        return;
+      }
       // Stateful async flows wait for a panel-driven response.
       if (interactive.has(call.name)) {
         requests.add(call.name, call.params);
@@ -87,5 +97,5 @@ export function createMock(options: CreateMockOptions): MockController {
     },
   });
 
-  return { logger, requests, emit };
+  return { logger, requests, cloudStorage, emit };
 }
