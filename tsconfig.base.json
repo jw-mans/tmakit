@@ -13,7 +13,6 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "declaration": true,
     "paths": {
       "@tmakit/core": ["./packages/core/src/index.ts"],
       "tma-devtools": ["./packages/devtools/src/index.ts"],
