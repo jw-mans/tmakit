@@ -26,3 +26,8 @@ export const mock = createMock({
     ...override,
   },
 });
+
+// Expose the mock for Playwright E2E (createTmaPageDriver drives window.__tmakit_mock__).
+if (import.meta.env.DEV) {
+  (window as unknown as Record<string, unknown>).__tmakit_mock__ = mock;
+}

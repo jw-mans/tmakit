@@ -11,15 +11,24 @@
   ],
   "scripts": {
     "dev": "npm run dev -w playground",
-    "build": "npm run build -w @tmakit/core && npm run build -w tma-kit && npm run build -w tma-devtools",
+    "build": "npm run build -w @tmakit/core && npm run build -w tma-kit && npm run build -w @tmakit/testing && npm run build -w tma-devtools",
     "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md,json}\""
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.1.0",
     "@types/node": "^24.13.2",
+    "@vitejs/plugin-react": "^6.0.3",
+    "jsdom": "^25.0.1",
     "prettier": "^3.4.0",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "typescript": "~6.0.2",
-    "vite": "^8.1.1"
+    "vite": "^8.1.1",
+    "vitest": "^3.0.0"
   }
 }

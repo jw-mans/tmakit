@@ -15,6 +15,7 @@
     "forceConsistentCasingInFileNames": true,
     "paths": {
       "@tmakit/core": ["./packages/core/src/index.ts"],
+      "@tmakit/testing": ["./packages/testing/src/index.ts"],
       "tma-devtools": ["./packages/devtools/src/index.ts"],
       "tma-kit": ["./packages/kit/src/index.ts"]
     }

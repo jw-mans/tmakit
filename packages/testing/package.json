@@ -1,8 +1,8 @@
 {
-  "name": "@tmakit/core",
+  "name": "@tmakit/testing",
   "version": "0.0.0",
   "type": "module",
-  "description": "Shared foundation for tmakit: SDK-agnostic bridge protocol types, event map and transport adapters",
+  "description": "Dev-only test utilities for tmakit: unit-test bridge double and Playwright driver on the core mock engine",
   "license": "MIT",
   "sideEffects": false,
   "files": ["dist"],
@@ -20,12 +20,10 @@
     "build": "vite build && tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit"
   },
-  "peerDependencies": {
-    "@telegram-apps/bridge": "*",
-    "@tma.js/bridge": "*"
+  "dependencies": {
+    "@tmakit/core": "*"
   },
-  "peerDependenciesMeta": {
-    "@telegram-apps/bridge": { "optional": true },
-    "@tma.js/bridge": { "optional": true }
+  "peerDependencies": {
+    "tma-kit": "*"
   }
 }
