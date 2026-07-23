@@ -1,14 +1,18 @@
 /**
  * Method -> minimum Bot API version.
  *
- * SOURCE OF TRUTH IS THE CHANGELOG, NOT MEMORY. This list is intentionally a
- * single, separate module so it can be kept in sync with
- * https://core.telegram.org/bots/webapps (changelog). NEVER gate by comparing
- * versions inline elsewhere — always go through {@link isMethodSupported}, and at
- * runtime prefer the SDK's own `isSupported`/`supports` when available.
+ * SOURCE OF TRUTH IS THE CHANGELOG, NOT MEMORY. 
+ * 
+ * This list is intentionally a single, separate module so it can be 
+ * kept in sync with https://core.telegram.org/bots/webapps (changelog). 
+ * 
+ * NEVER gate by comparing versions inline elsewhere — always go through 
+ * {@link isMethodSupported}, and at runtime prefer the SDK's own 
+ * `isSupported`/`supports` when available.
  *
- * Unknown methods are treated as supported (they predate gating). Add entries here,
- * with the version confirmed against the changelog, rather than scattering checks.
+ * Unknown methods are treated as supported (they predate gating). 
+ * Add entries here, with the version confirmed against the changelog, 
+ * rather than scattering checks.
  */
 
 // Confirmed against core.telegram.org/bots/webapps (2026-07):

@@ -1,14 +1,14 @@
 /** Bridge protocol types. Names are kept as loose strings on purpose — the exact
  * method/event set depends on the SDK and client version, so we don't hardcode an
- * exhaustive enum (see TMA-DEV-REFERENCE §3). */
+ * exhaustive enum. */
 
-/** A method the app sends to the client (app → client), e.g. "web_app_request_theme". */
+/** A method the app sends to the client (app -> client), e.g. "web_app_request_theme". */
 export type BridgeMethodName = string;
 
-/** An event the client sends to the app (client → app), e.g. "theme_changed". */
+/** An event the client sends to the app (client -> app), e.g. "theme_changed". */
 export type BridgeEventName = string;
 
-/** 'out' = app → client (postEvent); 'in' = client → app (emitted event). */
+/** 'out' = app -> client (postEvent); 'in' = client -> app (emitted event). */
 export type BridgeDirection = 'out' | 'in';
 
 /** A normalized outgoing bridge call, as seen at the transport level. */

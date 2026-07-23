@@ -4,7 +4,16 @@
   "type": "module",
   "description": "Shared foundation for tmakit: SDK-agnostic bridge protocol types, event map and transport adapters",
   "license": "MIT",
+  "keywords": ["telegram", "telegram-mini-apps", "tma", "mock", "bridge", "webapp"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jw-mans/tmakit.git",
+    "directory": "packages/core"
+  },
+  "homepage": "https://github.com/jw-mans/tmakit/tree/main/packages/core#readme",
+  "bugs": "https://github.com/jw-mans/tmakit/issues",
   "sideEffects": false,
+  "publishConfig": { "access": "public" },
   "files": ["dist"],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",

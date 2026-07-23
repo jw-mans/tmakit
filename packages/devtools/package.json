@@ -4,6 +4,14 @@
   "type": "module",
   "description": "Dev-only interactive panel and rich Telegram client mock for Telegram Mini Apps. Strip from production.",
   "license": "MIT",
+  "keywords": ["telegram", "telegram-mini-apps", "tma", "devtools", "mock", "react", "webapp"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jw-mans/tmakit.git",
+    "directory": "packages/devtools"
+  },
+  "homepage": "https://github.com/jw-mans/tmakit/tree/main/packages/devtools#readme",
+  "bugs": "https://github.com/jw-mans/tmakit/issues",
   "sideEffects": false,
   "files": ["dist"],
   "main": "./dist/index.cjs",

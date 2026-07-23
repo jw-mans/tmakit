@@ -4,6 +4,14 @@
   "type": "module",
   "description": "Opinionated runtime helpers for Telegram Mini Apps: auth, viewport/safe-area, storage, payments, navigation",
   "license": "MIT",
+  "keywords": ["telegram", "telegram-mini-apps", "tma", "react", "hooks", "initdata", "cloudstorage", "viewport", "payments", "webapp"],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jw-mans/tmakit.git",
+    "directory": "packages/kit"
+  },
+  "homepage": "https://github.com/jw-mans/tmakit/tree/main/packages/kit#readme",
+  "bugs": "https://github.com/jw-mans/tmakit/issues",
   "sideEffects": false,
   "files": ["dist"],
   "main": "./dist/index.cjs",

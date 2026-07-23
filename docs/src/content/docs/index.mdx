@@ -1,0 +1,41 @@
+---
+title: tmakit
+description: SDK-agnostic devtools and runtime kit for Telegram Mini Apps.
+template: splash
+hero:
+  tagline: SDK-agnostic devtools and runtime kit for Telegram Mini Apps.
+  actions:
+    - text: Get started
+      link: /tmakit/start/getting-started/
+      icon: right-arrow
+    - text: View on GitHub
+      link: https://github.com/jw-mans/tmakit
+      icon: external
+      variant: minimal
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+tmakit is not a wrapper over an SDK. The value is in the layers _around_ it: a rich
+dev-time client mock, opinionated runtime helpers the SDK deliberately leaves out, and
+testing utilities. It works with both `@telegram-apps/*` and `@tma.js/*`, because they
+share the same Telegram bridge protocol.
+
+<CardGrid stagger>
+	<Card title="Runtime kit" icon="rocket">
+		`tma-kit` — hooks & helpers for auth, viewport/safe-area, storage, payments,
+		navigation and feature-gating. Ships to production, tree-shakeable.
+	</Card>
+	<Card title="Devtools" icon="laptop">
+		`tma-devtools` — a floating panel and a full Telegram client mock. Dev-only,
+		stripped from production.
+	</Card>
+	<Card title="Testing" icon="approve-check">
+		`@tmakit/testing` — a unit-test bridge double and a Playwright driver on the same
+		mock engine.
+	</Card>
+	<Card title="Read the concepts" icon="open-book">
+		Understand the [bridge protocol](/tmakit/concepts/bridge-protocol/) and why the
+		mock is [SDK-agnostic](/tmakit/concepts/sdk-agnostic/).
+	</Card>
+</CardGrid>

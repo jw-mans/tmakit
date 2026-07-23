@@ -35,8 +35,6 @@ export function useStoredState<T>(
 
   const store = useMemo(
     () => createTypedStore<T>({ adapter: resolveStorageAdapter(bridge, storage), key, schema }),
-    // Rebuild only when the bridge or key changes.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     [bridge, key],
   );
 
@@ -55,7 +53,6 @@ export function useStoredState<T>(
     } finally {
       setLoading(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [store]);
 
   useEffect(() => {

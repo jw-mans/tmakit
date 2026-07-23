@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "jsx": "react-jsx",
+    "strict": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "types": ["node"],
+    "paths": {
+      "@tmakit/core": ["../packages/core/src/index.ts"],
+      "tma-kit": ["../packages/kit/src/index.ts"],
+      "@tmakit/testing": ["../packages/testing/src/index.ts"],
+      "tma-devtools": ["../packages/devtools/src/index.ts"]
+    }
+  },
+  "include": [
+    "../packages/core/src/**/*",
+    "../packages/kit/src/**/*",
+    "../packages/devtools/src/**/*",
+    "../packages/testing/src/**/*"
+  ]
+}

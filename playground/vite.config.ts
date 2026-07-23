@@ -7,6 +7,11 @@ import { resolve } from 'node:path';
 // HMR without rebuilding the libraries.
 export default defineConfig({
   plugins: [react()],
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true,
+  },
   resolve: {
     alias: {
       '@tmakit/core': resolve(import.meta.dirname, '../packages/core/src/index.ts'),

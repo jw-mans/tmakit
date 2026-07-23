@@ -32,7 +32,7 @@ export interface CreateMockOptions {
   interactiveMethods?: readonly string[];
   /** Simulate CloudStorage in-memory (answers invoke_custom_method). Default: true. */
   cloudStorage?: boolean;
-  /** Called for every outgoing app → client call, after it is logged. */
+  /** Called for every outgoing app -> client call, after it is logged. */
   onCall?: (call: BridgeCall) => void;
 }
 
@@ -43,7 +43,7 @@ export interface MockController {
   readonly requests: RequestManager;
   /** In-memory CloudStorage simulation (undefined if disabled). */
   readonly cloudStorage?: CloudStorageSim;
-  /** Emit an event into the app (client → app); also recorded in the log as 'in'. */
+  /** Emit an event into the app (client -> app); also recorded in the log as 'in'. */
   emit(name: string, params?: unknown): void;
 }
 
